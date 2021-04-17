@@ -1,0 +1,43 @@
+<div id="reload" class="container">
+  </br>
+  <center><h2 class="text-white">Mis Documentos</h2></center>
+  </br>
+  <table id="example" class="table table-striped">
+  <thead>
+      <tr>
+        <th class="text-black">Titulo</th>
+        <th class="text-black">Tema</th>
+        <th class="text-black">Archivo</th>
+        <th class="text-black">Ver</th>
+        <% if @user.admin == 1 %>
+          <th class="text-black">Borrar</th>
+        <% end %>
+      </tr>
+    </thead>
+  <tbody> 
+        <% @documents.each do |d| %>
+          <%if d.visibility %>
+            <form action="" method="POST">
+              <tr>
+                <td class="text-white"><%=d.title %></td>
+                <td class="text-white"><%=d.topic %></td>
+                <td class="text-white"><%=d.file %></td>
+                <td><a href = "<%="#{d.id}#{d.file}"%>" target="_blank" >Ir</a></td>
+                <% if @user.admin == 1 %>
+                  <td><button name="delete_doc" type="submit" value="<%=d.id%>" formaction="/delete_doc">Eliminar</button></td>
+                <% end %>
+              </tr>
+            </form>
+          <%end%>
+        <%end%>    
+  </tbody>
+</table>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $('#example').DataTable();
+  } );
+</script>
+
+  
